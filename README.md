@@ -42,7 +42,7 @@ simulaiton with higher numerical precision.
 ### Adaptive Step Size RKF45
 
 The adaptive step size moethod can be very tricky to "get right" since if the field's evolved does not converge properly, the simulation could get stuck repeat in a loop.
-the recommended tolerance here is again between 1e-4 to 1e-7 for the range of step size allowed for a high precision run while balancing simulation time and numerical stability
+the recommended tolerance here is again between 1e-5 to 1e-8 for the range of step size allowed for a high precision run while balancing simulation time and numerical stability
 
 --------------------------------------------------------------------------------------------
 
