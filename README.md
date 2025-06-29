@@ -28,4 +28,6 @@ simulation run. Highly recommend running all simulations with 512x512 grid for s
 
 # -----------
 # Solver fine tuning
-For Relaxation parameters, I'ts recommended to set tolerance to smaller than 1e-5 but using 1e-4 to obtain a rough picture of the pattern on set is 
+For Relaxation parameters, I'ts recommended to set tolerance to smaller than 1e-5 but using 1e-4 to obtain a rough picture of the pattern on set before commting to run the long 
+simulaiton with higher numerical precision.
+# -----------
