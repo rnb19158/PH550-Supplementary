@@ -3,7 +3,7 @@
 """
 Created on Fri Feb 21 21:09:03 2025
 
-@author: zhanmingmei
+@author: Zhanming Mei
 
 BEC-Cavity Coupled System Simulator - Adaptive Step-Size Version
 
