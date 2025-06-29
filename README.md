@@ -13,7 +13,7 @@ to fixed step size with relaxation method as described by the Model handbook by 
 --------------------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------------------
-## Exel Tables
+## Excel Tables
 
 There are 4 Excel tables, 3 for paramters sweep and 1 with the parameters and their corresponding patterns.
 Table names are self explanatory.
