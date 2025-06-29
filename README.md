@@ -23,7 +23,7 @@ Table names are self explanatory.
 
 # Quick Guide
 --------------------------------------------------------------------------------------------
-# Numeriocal Stability and Otical Saturation in BEC Cavity Model 
+## Numeriocal Stability and Otical Saturation in BEC Cavity Model 
 
 You may strugle with
 numerical stability with BEC Cavity simulations, be  ware of the Sigma value (optical saturatuion), and try out different once until 
