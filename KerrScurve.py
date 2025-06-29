@@ -2,7 +2,7 @@
 """
 Created on Mon june 2 11:37:58 2025
 
-@author: zhanmingmei
+@author: Zhanming Mei
 
 Kerr Cavity S-curve Diagram Plotter
 """
