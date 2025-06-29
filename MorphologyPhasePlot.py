@@ -2,7 +2,7 @@
 """
 Created on Sat june 7 15:18:22 2025
 
-@author: zhanmingmei
+@author: Zhanming Mei
 
 Norphology Phase Diagram Plotter
 """
