@@ -88,3 +88,27 @@ As a final safeguard, a basic check is performed during the evolution loop to de
 
 --------------------------------------------------------------------------------------------
 
+
+# Data Analysis/Interpretation
+--------------------------------------------------------------------------------------------
+The script AnalysisTool.py is for the output data from the Cavity simulations (BECDTS.py/KerrDTS.py).
+It takes the CSV files representing the complex atomic field (Psi) and performs
+two key analyses:
+
+# 1.  Lattice Constant (Λ) Calculation:
+    - Computes the 2D Fast Fourier Transform (FFT) of the atomic intensity |Psi|**2.
+    - Identifies the primary peaks in the Fourier spectrum, which correspond to the
+      fundamental spatial frequencies of the pattern.
+    - Calculates the lattice constant Λ = 2*pi/|k|, where |k| is the wavevector
+      magnitude of the pattern.
+    - Estimates uncertainty from the standard deviation of the identified peak distances.
+
+# 2.  Rotational Order Parameter (Psi_4 and Psi_6) Calculation:
+    - Finds local maxima (i.e., the bright spots) in the real-space intensity pattern.
+    - Calculates the four-fold (Psi_4) and six-fold (Psi_6) rotational order
+      parameters to quantitatively measure the pattern's symmetry.
+    - Classifies the pattern as hexagonal, square, or disordered based on
+      the calculated order parameter values.
+
+--------------------------------------------------------------------------------------------
+
