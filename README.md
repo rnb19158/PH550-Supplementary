@@ -47,9 +47,8 @@ the recommended tolerance here is again between 1e-4 to 1e-7 for the range of st
 --------------------------------------------------------------------------------------------
 
 
-# Error checks 
+# Error checks/Convergence test
 --------------------------------------------------------------------------------------------
-# Convergence test
 The simulation utilises a sophisticated, two-pronged approach to ensure numerical accuracy and stability. It independently manages the convergence of the fast-evolving optical field and controls the truncation error of the slow-evolving atomic field's dynamics.
 
 #### 1. Optical Field Steady-State Convergence
