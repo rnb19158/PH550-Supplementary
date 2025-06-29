@@ -25,7 +25,7 @@ Table names are self explanatory.
 --------------------------------------------------------------------------------------------
 # Numeriocal Stability and Otical Saturation in BEC Cavity Model 
 
-you may strugle with 
+You may strugle with
 numerical stability with BEC Cavity simulations, be  ware of the Sigma value (optical saturatuion), and try out different once until 
 numerical stability is reached where the different interactions are balanced and stable patterns will arise/anneal with a high enough precision 
 simulation run. Highly recommend running all simulations with 512x512 grid for suffcient stability and resolution.
