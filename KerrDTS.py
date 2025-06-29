@@ -2,7 +2,7 @@
 """
 Created on Fri May 13 17:23:48 2025
 
-@author: zhanmingmei
+@author: Zhanming Mei
 
 Kerr Cavity Simulator with Adaptive Step-Size (RKF45)
 
