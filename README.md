@@ -21,7 +21,7 @@ Zhanming Mei, PH550 Project Report, University of Strathclyde (2025)
 Four Excel tables are provided containing systematic parameter sweeps:
 - `Param Sweep 1.xlsx`: Cavity detuning variation (θ = 0 to 4)
 - `Param Sweep 2.xlsx`: parameter space exploration
-- `Param Sweep 2.xlsx`: wider parameter space exploration with Collisional parameter variation (βcol = -2.5 to 2.5)
+- `Param Sweep 3.xlsx`: wider parameter space exploration with Collisional parameter variation (βcol = -2.5 to 2.5)
 - `Pattern-parameters.xlsx`: Complete mapping of parameters to observed patterns
 
 ---
