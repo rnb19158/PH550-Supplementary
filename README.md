@@ -1,6 +1,6 @@
 # Supplementary Material for "Morphology-Dependent Pattern Selection in a Cavity-Driven Bose-Einstein Condensate"
 
-Z. Mei, PH550 Project Report, University of Strathclyde (2025)
+Zhanming Mei, PH550 Project Report, University of Strathclyde (2025)
 
 ---
 
@@ -98,10 +98,9 @@ Phase transitions determined when:
 
 To reproduce key results from the paper:
 1. Figure 3 (BEC pattern): θ = 1.75, βcol = 1.5, σ = appropriate value for stability
-2. Figure 5 (hexagonal lattice): θ = 1.5, βcol = 1.5, top-hat pump with rₚ = 10w₀
+2. Figure 5 (hexagonal lattice): θ = 1.5, βcol = 1.5, top-hat pump with rₚ = 10w, σ = appropriate value for stability
 3. Phase diagram: Run parameter sweeps using provided Excel templates
 
-For questions or additional data, contact: zhanming.mei@strath.ac.uk
 
 ---
 
