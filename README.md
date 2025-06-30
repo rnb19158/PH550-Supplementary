@@ -1,118 +1,114 @@
-# PH550-Supplementary Material
-PH550 Project Repost Supplementary Material
-## KerrDTS.py and BECDTS.py are the scrpts used to simulate the models described by the PRL report.
-The scripts were majority autored by me (Zhanming Mei), and partially based off the scripts provided by supervisor G.W.Henderson.
+# Supplementary Material for "Morphology-Dependent Pattern Selection in a Cavity-Driven Bose-Einstein Condensate"
 
+Z. Mei, PH550 Project Report, University of Strathclyde (2025)
 
---------------------------------------------------------------------------------------------
-## Adaptive Step size utilisation
+---
 
-RFK45 adaptive time step can be enabled by changed the toggle in BECDTS.py, and setting to "False" reverts the code back
-to fixed step size with relaxation method as described by the Model handbook by G.W.Henderson.
+## Code Availability
 
---------------------------------------------------------------------------------------------
+### Main Simulation Scripts
+- `KerrDTS.py`: Simulation of pattern formation in Kerr medium (baseline comparison)
+- `BECDTS.py`: BEC-cavity system simulation implementing coupled LLE-GPE dynamics
+- `AnalysisTool.py`: Pattern analysis including lattice constant extraction and order parameter calculation
 
---------------------------------------------------------------------------------------------
-## Excel Tables
+*Note: Scripts were primarily authored by Z. Mei, with initial framework partially based on code provided by supervisor G.W. Henderson.*
 
-There are 4 Excel tables, 3 for paramters sweep and 1 with the parameters and their corresponding patterns.
-Table names are self explanatory.
+---
 
---------------------------------------------------------------------------------------------
+## Data Files
 
+### Parameter Tables
+Four Excel tables are provided containing systematic parameter sweeps:
+- `Parameter_Sweep_Theta.xlsx`: Cavity detuning variation (θ = 0 to 4)
+- `Parameter_Sweep_BetaCol.xlsx`: Collisional parameter variation (βcol = -2.5 to 2.5)
+- `Parameter_Sweep_Combined.xlsx`: Two-dimensional parameter space exploration
+- `Pattern_Classification.xlsx`: Complete mapping of parameters to observed patterns
 
-## Quick Guide
---------------------------------------------------------------------------------------------
-### Numeriocal Stability and Otical Saturation in BEC Cavity Model 
+---
 
-You may strugle with
-numerical stability with BEC Cavity simulations, be  ware of the Sigma value (optical saturatuion), and try out different once until 
-numerical stability is reached where the different interactions are balanced and stable patterns will arise/anneal with a high enough precision 
-simulation run. Highly recommend running all simulations with 512x512 grid for suffcient stability and resolution.
+## Numerical Methods and Convergence
 
---------------------------------------------------------------------------------------------
+### Adaptive Step Size Implementation
+The RKF45 adaptive timestepping can be enabled/disabled via the toggle in `BECDTS.py`. Setting to `False` reverts to fixed-step evolution with the relaxation method as described in the theoretical framework.
 
-
-## Solver Parameters Fine Tuning
---------------------------------------------------------------------------------------------
-### Relaxation Method 
-
-For Relaxation parameters, I'ts recommended to set tolerance to smaller than 1e-5 but using 1e-4 to obtain a rough picture of the pattern on set before commting to run the long 
-simulaiton with higher numerical precision.
-### Adaptive Step Size RKF45
-
-The adaptive step size moethod can be very tricky to "get right" since if the field's evolved does not converge properly, the simulation could get stuck repeat in a loop.
-the recommended tolerance here is again between 1e-5 to 1e-8 for the range of step size allowed for a high precision run while balancing simulation time and numerical stability
-
---------------------------------------------------------------------------------------------
-
-
-## Error checks/Convergence test
---------------------------------------------------------------------------------------------
-The simulation utilises a sophisticated, two-pronged approach to ensure numerical accuracy and stability. It independently manages the convergence of the fast-evolving optical field and controls the truncation error of the slow-evolving atomic field's dynamics.
+### Convergence Criteria
 
 #### 1. Optical Field Steady-State Convergence
+The simulation employs a relaxation method for the rapidly-evolving optical field. At each atomic timestep, the optical field is evolved to steady state using:
+- Convergence tolerance: 10^-6 (relative to mean field amplitude)
+- Recommended for initial testing: 10^-4 (faster but lower precision)
+- Production runs: 10^-5 to 10^-6
 
-To handle the rapid evolution of the intra-cavity optical field, the simulation employs a Relaxation Method. Instead of co-evolving the optical field in time, it is calculated at each atomic time step by evolving it to its steady state.
+#### 2. Atomic Field Evolution (RKF45)
+Adaptive step-size control maintains local truncation error within specified bounds:
+- Recommended tolerance: 10^-5 to 10^-8
+- Fourth and fifth-order solutions compared at each step
+- Step rejected and reduced if error exceeds tolerance
+- Optimal balance between accuracy and computational efficiency
 
-The convergence criterion for this steady state is defined within the relax_optical_field_to_steady_state function:
+#### 3. Numerical Stability Safeguards
+- Automatic termination upon NaN detection
+- Monitoring of optical saturation parameter (σ)
+- Grid resolution: 512×512 recommended for stability
 
-The simulation tracks the mean amplitude of the optical field over its most recent evolution steps.
+---
 
-It then calculates the standard deviation of these tracked values. A steady state is considered to have been reached when this standard deviation becomes negligibly small relative to the mean amplitude, falling below a user-defined tolerance.
+## Practical Usage Guide
 
-This ensures that the optical field used to influence the atoms is stable and is not undergoing transient oscillations.
+### Quick Start
+For stable pattern formation in BEC-cavity simulations:
+1. Monitor the optical saturation parameter (σ) - adjust if instabilities occur
+2. Use 512×512 spatial grid for sufficient resolution
+3. Start with relaxation tolerance 10^-4 for parameter exploration
+4. Refine to 10^-6 for publication-quality results
 
-#### 2. Atomic Field Truncation Error Control (RKF45)
+### Common Issues and Solutions
+- **Numerical instabilities**: Adjust σ value to balance competing interactions
+- **Slow convergence**: Check if parameters lie near phase boundaries
+- **RKF45 getting stuck**: Occurs near critical points - try tighter tolerance or switch to fixed-step
 
-The primary mechanism for controlling the accuracy of the main simulation is the Runge-Kutta-Fehlberg 45 (RKF45) method. This is an adaptive step-size technique that guarantees the numerical error remains within a pre-defined limit at each step of the atomic field's evolution.
+---
 
-The process is as follows:
+## Data Analysis Methods
 
-At each step in time, the simulation calculates two solutions for the atomic field: one with a fourth-order Runge-Kutta method (RKF4) and another with a fifth-order one (RKF5).
+### Lattice Constant Determination
+The `AnalysisTool.py` script processes simulation output (CSV files) to extract:
 
-The absolute difference between these two solutions provides a robust estimate of the local truncation error, ε_T.
+1. **Fourier Analysis**:
+   - 2D FFT of atomic density |ψ|²
+   - Peak identification in k-space
+   - Lattice constant Λ = 2π/|k|
+   - Uncertainty from standard deviation of peak positions
 
-This error is compared against a maximum permitted truncation error, ε_Tmax, which is set by the user (rkf_tolerance).
+2. **Order Parameter Calculation**:
+   - Local maxima detection (intensity threshold: 0.5 × max(I))
+   - Six-fold order: Ψ₆ = |Σⱼ exp(6iφⱼ)|/N
+   - Four-fold order: Ψ₄ = |Σⱼ exp(4iφⱼ)|/N
+   - Pattern classification: hexagonal (Ψ₆ > 0.8), square (Ψ₄ > 0.8), or disordered
 
-If the calculated error ε_T is greater than the allowed tolerance ε_Tmax, the step is rejected. A new, smaller time step is then calculated, and the step is attempted again.
+### Phase Boundary Identification
+Phase transitions determined when:
+- Order parameter discontinuity: ΔΨ > 0.5
+- Symmetry crossover: |Ψ₆ - Ψ₄| < 0.1
+- Uncertainty in boundary position: ±0.1 in θ, ±0.05 in βcol
 
-If the error is within the tolerance, the more accurate fifth-order solution is accepted, and the simulation proceeds. An optimal step size for the next iteration is also calculated based on the most recent error estimation.
+---
 
-This dynamic process ensures that the simulation automatically takes smaller steps during periods of complex evolution and larger steps when the dynamics are simpler, maintaining a consistent level of accuracy whilst maximising efficiency.
+## Reproducibility
 
-#### 3. Numerical Instability Check
+To reproduce key results from the paper:
+1. Figure 3 (BEC pattern): θ = 1.75, βcol = 1.5, σ = appropriate value for stability
+2. Figure 5 (hexagonal lattice): θ = 1.5, βcol = 1.5, top-hat pump with rₚ = 10w₀
+3. Phase diagram: Run parameter sweeps using provided Excel templates
 
-As a final safeguard, a basic check is performed during the evolution loop to detect numerical breakdown. If the simulation values become non-physical (e.g., resulting in a NaN, or 'Not a Number' value), typically due to extreme nonlinearities, the evolution is terminated to prevent generating erroneous results.
+For questions or additional data, contact: zhanming.mei@strath.ac.uk
 
---------------------------------------------------------------------------------------------
+---
 
+## Version Information
+- Python 3.8+
+- NumPy 1.19+
+- SciPy 1.5+
+- Matplotlib 3.3+
 
-## Data Analysis/Interpretation
---------------------------------------------------------------------------------------------
-The script AnalysisTool.py is for the output data from the Cavity simulations (BECDTS.py/KerrDTS.py).
-It takes the CSV files representing the complex atomic field (Psi) and performs
-two key analyses:
-
-#### 1.  Lattice Constant (Λ) Calculation:
-Computes the 2D Fast Fourier Transform (FFT) of the atomic intensity |Psi|**2.
-
-Identifies the primary peaks in the Fourier spectrum, which correspond to the
-fundamental spatial frequencies of the pattern.
-
-Calculates the lattice constant Λ = 2*pi/|k|, where |k| is the wavevector
-magnitude of the pattern.
-
-Estimates uncertainty from the standard deviation of the identified peak distances.
-
-#### 2.  Rotational Order Parameter (Psi_4 and Psi_6) Calculation:
-Finds local maxima (i.e., the bright spots) in the real-space intensity pattern.
-
-Calculates the four-fold (Psi_4) and six-fold (Psi_6) rotational order
-parameters to quantitatively measure the pattern's symmetry.
-
-Classifies the pattern as hexagonal, square, or disordered based on
-the calculated order parameter values.
-
---------------------------------------------------------------------------------------------
-
+Last updated: June 2025
