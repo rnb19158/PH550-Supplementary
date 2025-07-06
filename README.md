@@ -56,7 +56,7 @@ Adaptive step-size control maintains local truncation error within specified bou
 
 ### Quick Start
 For stable pattern formation in BEC-cavity simulations:
-1. Monitor the optical saturation parameter (σ) - adjust if instabilities occur, and increase pump amplitude incrementally until pattern forms.
+1. Monitor the optical saturation parameter (σ) - adjust if instabilities occur, and increase pump amplitude incrementally until pattern forms, adjusting sigma accordingly based off the pump amplitude and numerical solver tolerance levels and grid resolution.
 2. Use 512×512 spatial grid for sufficient resolution, lower grid resolution will result in pre-mature pattern collapse. 
 3. Start with relaxation tolerance 10^-4 for parameter exploration
 4. Refine to 10^-6 for high precision results
