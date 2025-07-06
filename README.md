@@ -22,9 +22,8 @@ Four Excel tables are provided containing systematic parameter sweeps:
 - `Param Sweep 1.xlsx`: Cavity detuning variation (θ = 0 to 4)
 - `Param Sweep 2.xlsx`: parameter space exploration
 - `Param Sweep 3.xlsx`: wider parameter space exploration with Collisional parameter variation (βcol = -2.5 to 2.5)
-- `Pattern-parameters.xlsx`: Complete mapping of parameters to observed patterns
-
----
+- `Pattern-parameters.xlsx`: Complete mapping of parameters to observed patterns, to get produce patterns, fine tuning of sigma and pump amplitude may be required, the grid resolution of lower than 512x512 is not likely produce stable patterns with clean periodic repetitions.
+- 
 
 ## Numerical Methods and Convergence
 
@@ -57,10 +56,10 @@ Adaptive step-size control maintains local truncation error within specified bou
 
 ### Quick Start
 For stable pattern formation in BEC-cavity simulations:
-1. Monitor the optical saturation parameter (σ) - adjust if instabilities occur
-2. Use 512×512 spatial grid for sufficient resolution
+1. Monitor the optical saturation parameter (σ) - adjust if instabilities occur, and increase pump amplitude incrementally until pattern forms.
+2. Use 512×512 spatial grid for sufficient resolution, lower grid resolution will result in pre-mature pattern collapse. 
 3. Start with relaxation tolerance 10^-4 for parameter exploration
-4. Refine to 10^-6 for publication-quality results
+4. Refine to 10^-6 for high precision results
 
 ### Common Issues and Solutions
 - **Numerical instabilities**: Adjust σ value to balance competing interactions
@@ -99,7 +98,8 @@ Phase transitions determined when:
 To reproduce key results from the paper:
 1. Figure 3 (BEC pattern): θ = 1.75, βcol = 1.5, σ = appropriate value for stability
 2. Figure 5 (hexagonal lattice): θ = 1.5, βcol = 1.5, top-hat pump with rₚ = 10w, σ = appropriate value for stability
-3. Phase diagram: Run parameter sweeps using provided Excel templates
+3. Pattern formation is highly dependent on numerical precision and stability, so increase pump amplitude if sigma is on.
+4. Phase diagram: Run parameter sweeps using provided Excel templates
 
 
 ---
