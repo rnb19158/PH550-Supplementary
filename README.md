@@ -99,7 +99,7 @@ To reproduce key results from the paper:
 1. Figure 3 (BEC pattern): θ = 1.75, βcol = 1.5, σ = appropriate value for stability
 2. Figure 5 (hexagonal lattice): θ = 1.5, βcol = 1.5, top-hat pump with rₚ = 10w, σ = appropriate value for stability
 3. Pattern formation is highly dependent on numerical precision and stability, so increase pump amplitude if sigma is on.
-4. Phase diagram: Run parameter sweeps using provided Excel templates
+4. Phase diagram: Run parameter sweeps using provided Excel tables.
 
 
 ---
